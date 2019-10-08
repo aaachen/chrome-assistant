@@ -1,5 +1,5 @@
 // $(function() {
-// $(".draggable").draggable({ cancel: null }); 
+// $(".draggable").draggable({ cancel: null });
 // $(".draggable").find(":input").on('mousedown', function (e) {
 //     var mdown = new MouseEvent("mousedown", {
 //         screenX: e.screenX,

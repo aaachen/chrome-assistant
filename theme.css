@@ -1,3 +1,19 @@
-select{position:absolute; width:160px; height:23px; left:0; top:0; border:0;}
-input{position: absolute; width: 140px;height:17px; left:0; top:0;}
-p{position: relative; margin-top:50px;}
+select {
+  position: absolute;
+  width: 160px;
+  height: 23px;
+  left: 0;
+  top: 0;
+  border: 0;
+}
+input {
+  position: absolute;
+  width: 140px;
+  height: 17px;
+  left: 0;
+  top: 0;
+}
+p {
+  position: relative;
+  margin-top: 50px;
+}
