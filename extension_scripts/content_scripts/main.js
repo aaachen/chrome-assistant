@@ -255,7 +255,7 @@ var detect_element_selection = function(event) {
 };
 
 function goToNextURL() {
-  // //TODO: Present the user with choice instead of going with 0th edge
+  //TODO: Present the user with choice instead of going with 0th edge
   get_dag(function(tutorial) {
     get_next_node(tutorial, function(response) {
       if (response == null) return;

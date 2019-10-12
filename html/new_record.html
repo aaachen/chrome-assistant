@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title></title>
-	 <link rel="stylesheet" href="../assets/css/foundation.min.css">
-	<script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/foundation.min.js"></script>
-    <style type="text/css">
-       body {
-        margin: 10px;
-        white-space: nowrap;
-        width:200px;
-        height: 270px;
-      }
-      .container {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
-      }
+  <title></title>
+  <link rel="stylesheet" href="../assets/css/foundation.min.css">
+  <script src="../assets/js/jquery.js"></script>
+  <script src="../assets/js/foundation.min.js"></script>
+  <style type="text/css">
+    body {
+      margin: 10px;
+      white-space: nowrap;
+      width: 200px;
+      height: 270px;
+    }
 
-      #startR, #endR{
-        width:100%;
-      }
+    .container {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
 
-    </style>
+    #startR,
+    #endR {
+      width: 100%;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="row">
-      <div class="small-12 columns">
-       <button data-addCart type="button" class="tiny button success radius" id="back_button"><span>Back</span></button>
-      </div>
-    </div> 
-    <h3>Sets Up Your Tutorial: </h3> 
-    <div class="row">
-      <div class ="small-12 colums">
-        <form id='form'>
-            <input type="text" name="tutorialName" placeholder="Tutorial Name" id='formName'>
-            <button data-addCart type="button" class="button button1" id="startR"><span>Start Recording!</span></button>
-          </form>
-        </div>
-     </div>  
-     <div class="row">
-        <div class ="small-12 colums">
-              <button data-addCart type="button" class="button button1" id="endR" disabled><span>End Recording</span></button>
-          </div>
-      </div>  
+  <div class="row">
+    <div class="small-12 columns">
+      <button data-addCart type="button" class="tiny button success radius" id="back_button"><span>Back</span></button>
+    </div>
+  </div>
+  <h3>Sets Up Your Tutorial: </h3>
+  <div class="row">
+    <div class="small-12 colums">
+      <form id='form'>
+        <input type="text" name="tutorialName" placeholder="Tutorial Name" id='formName'>
+        <button data-addCart type="button" class="button button1" id="startR"><span>Start Recording!</span></button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 colums">
+      <button data-addCart type="button" class="button button1" id="endR" disabled><span>End Recording</span></button>
+    </div>
+  </div>
 
 </body>
 <script src="../extension_scripts/popup/new_record.js"></script>
+
 </html>

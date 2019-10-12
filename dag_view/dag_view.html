@@ -1,97 +1,116 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Dag Representation for Apollo</title>
-        <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
-        <script src="dagre-d3.js"></script>
-        
-    </head>
-    <body>
-        <style id="css">
-            body {
-              font: 300 14px 'Helvetica Neue', Helvetica;
-                margin: 0;
-                padding: 0;
-            }
-            /*Prevents clicking of the text label on a graph node.*/
-            tspan{
-                pointer-events: none;
-                -webkit-touch-callout: none; /* iOS Safari */
-                  -webkit-user-select: none; /* Safari */
-                    -khtml-user-select: none; /* Konqueror HTML */
-                      -moz-user-select: none; /* Firefox */
-                        -ms-user-select: none; /* Internet Explorer/Edge */
-                            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-            }
-            h1 {
-                text-align: center;
-            }
-            svg {
-                border: 1px solid black;
-                display: block;
-                margin: auto;
-            }
-            p {
-              position: absolute;
-                right: 0px; 
-                width: 5em;
-            }
-            #ctxmenu {
-                position: absolute;
-                z-index: 1000;
-                background-color: white;
-                border: 1px solid black;
-                border-radius: 5px;
-                height: auto;
-            }
-            .hide {
-                display: none;
-            }
-            #rmenu {
-                list-style: none;
-                margin-left: 0;
-                margin-top: 0;
-                padding: 0.5em;
-            }
-            .menu-option {
-                padding: 0.5em;
-                border-bottom: 1px solid gray;
-            }
-            #addNode {
-                position: relative;
-                width: 100%;
-            }
-            .node rect,
-            .node circle,
-            .node ellipse,
-            .node polygon {
-                
-              stroke: #333;
-              fill: #fff;
-              stroke-width: 1.5px;
-            }
 
-            
-            .edgePath path {
-              stroke: #333;
-              fill: #333;
-              stroke-width: 1.5px;
-            }
-        </style>
-        <div id="ctxmenu" class="hide">
-            <ul id="rmenu">
-                <li id="addNode" class="menu-option">Add Node</li>
-                <li id="delNode" class="menu-option">Delete Node</li>
-            </ul>
-        </div>
-        <h1>Apollo DAG Display</h1>
-        <svg width=600 height=500>  
-            <g></g>
-        </svg>
-        
-        <script src="dag_view.js"></script>
-        
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>Dag Representation for Apollo</title>
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="dagre-d3.js"></script>
+
+</head>
+
+<body>
+    <style id="css">
+        body {
+            font: 300 14px 'Helvetica Neue', Helvetica;
+            margin: 0;
+            padding: 0;
+        }
+
+        /*Prevents clicking of the text label on a graph node.*/
+        tspan {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        svg {
+            border: 1px solid black;
+            display: block;
+            margin: auto;
+        }
+
+        p {
+            position: absolute;
+            right: 0px;
+            width: 5em;
+        }
+
+        #ctxmenu {
+            position: absolute;
+            z-index: 1000;
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 5px;
+            height: auto;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        #rmenu {
+            list-style: none;
+            margin-left: 0;
+            margin-top: 0;
+            padding: 0.5em;
+        }
+
+        .menu-option {
+            padding: 0.5em;
+            border-bottom: 1px solid gray;
+        }
+
+        #addNode {
+            position: relative;
+            width: 100%;
+        }
+
+        .node rect,
+        .node circle,
+        .node ellipse,
+        .node polygon {
+
+            stroke: #333;
+            fill: #fff;
+            stroke-width: 1.5px;
+        }
+
+
+        .edgePath path {
+            stroke: #333;
+            fill: #333;
+            stroke-width: 1.5px;
+        }
+    </style>
+    <div id="ctxmenu" class="hide">
+        <ul id="rmenu">
+            <li id="addNode" class="menu-option">Add Node</li>
+            <li id="delNode" class="menu-option">Delete Node</li>
+        </ul>
+    </div>
+    <h1>Apollo DAG Display</h1>
+    <svg width=600 height=500>
+        <g></g>
+    </svg>
+
+    <script src="dag_view.js"></script>
+
+</body>
+
 </html>

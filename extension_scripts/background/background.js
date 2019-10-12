@@ -164,6 +164,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       break;
 
     default:
+      console.log("Default case reached");
       break;
   }
 });

@@ -3,46 +3,48 @@
  "browser_action" field in manifest.json contains the "default_popup" key with
  value "popup.html".
  -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Getting Started Extension's Popup</title>
-    <link rel="stylesheet" href="../assets/css/foundation.min.css">
-    <style type="text/css">
-      body {
-        margin: 10px;
-        white-space: nowrap;
-        width:200px;
-      }
 
-      h1 {
-        font-size: 15px;
-      }
+<head>
+  <title>Getting Started Extension's Popup</title>
+  <link rel="stylesheet" href="../assets/css/foundation.min.css">
+  <style type="text/css">
+    body {
+      margin: 10px;
+      white-space: nowrap;
+      width: 200px;
+    }
 
-      button{
-        width:100%;
-      }
-    </style>
+    h1 {
+      font-size: 15px;
+    }
 
-    <!--
+    button {
+      width: 100%;
+    }
+  </style>
+
+  <!--
       - JavaScript and HTML must be in separate files: see our Content Security
       - Policy documentation[1] for details and explanation.
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
     -->
 
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/foundation.min.js"></script>
-  </head>
+  <script src="../assets/js/jquery.js"></script>
+  <script src="../assets/js/foundation.min.js"></script>
+</head>
 
-  <body>
-    <h2>Web Tutorials</h2>
-    
-      <h2>Student View</h2> 
-      <button data-addCart type="button" class="button" id="load_record"><span>Load Record</span></button>
-      <h2>Instructor View</h2>
-      <button data-addCart type="button" class="button" id="newR"><span>New Recording</span></button><br>
-      <button data-addCart type="button" class="button" id="clear_record"><span>Clear recording</span></button><br>
-      <button data-addCart type="button" class="button" id="loadR"><span>Edit/Load</span></button><br>
-   <script src="../extension_scripts/popup/popup.js"></script>
+<body>
+  <h2>Web Tutorials</h2>
+
+  <h2>Student View</h2>
+  <button data-addCart type="button" class="button" id="load_record"><span>Load Record</span></button>
+  <h2>Instructor View</h2>
+  <button data-addCart type="button" class="button" id="newR"><span>New Recording</span></button><br>
+  <button data-addCart type="button" class="button" id="clear_record"><span>Clear recording</span></button><br>
+  <button data-addCart type="button" class="button" id="loadR"><span>Edit/Load</span></button><br>
+  <script src="../extension_scripts/popup/popup.js"></script>
+
 </html>
