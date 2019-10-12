@@ -54,7 +54,7 @@ function importDAG(tutorial, json) {
   tutorial.DAG = graphlib.json.read(tutorial.DAG);
 }
 
-//Retrieve a list of node ids stemming from the specified node_id
+// Retrieve a list of node ids stemming from the specified node_id
 function getOutEdges(tutorial, node_id) {
   /*Input: String */
   //raw edges look like: [{v:, w:},{v:,w: },{v:,w:}]
@@ -66,20 +66,20 @@ function getOutEdges(tutorial, node_id) {
   return string_edges; /* Output: Array of String node ids */
 }
 
-//This global variable is meant to maintain the button state across refreshed pages. For example, when you
-//advance to the next link, you will maintain the button on the bottom right.
-//This should probably be cleaned up and not be global.
+// This global variable is meant to maintain the button state across refreshed pages. For example, when you
+// advance to the next link, you will maintain the button on the bottom right.
+// This should probably be cleaned up and not be global.
 var load_status = false;
 
-//"html" : <html here>
-//"entered_text" : This is the text the professor entered
+// "html" : <html here>
+// "entered_text" : This is the text the professor entered
 
-//This background listener listens for comamnds from the content script. The commands are:
-//Get: this returns the first itme in the stack
-//Send: This adds an item to the stack
-//Save: Right now this saves the recording stream and merges it into the DAG. In the future, a visualizaiton should\
-//merge the DAG.
-//Clear: This empties all of the items in the DAG and recording stream. (Say)
+// This background listener listens for comamnds from the content script. The commands are:
+// Get: this returns the first itme in the stack
+// Send: This adds an item to the stack
+// Save: Right now this saves the recording stream and merges it into the DAG. In the future, a visualizaiton should\
+// merge the DAG.
+// Clear: This empties all of the items in the DAG and recording stream. (Say)
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   console.log(
     sender.tab
@@ -120,7 +120,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     case "get_options":
       console.log("Get options called");
       break;
-    //This case is only used when recording steps. Adds a step to tutorial.
+    // This case is only used when recording steps. Adds a step to tutorial.
     case "record_action":
       console.log("Record action called");
       insertNewNode(
@@ -138,16 +138,16 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       });
       break;
 
-    //Sends the tutorial object to the content script
+    // Sends the tutorial object to the content script
     case "save":
       console.log("Save hit");
-      //When the tutorial starts the current node id is set to the root node ID to be the starting place.
+      // When the tutorial starts the current node id is set to the root node ID to be the starting place.
       tutorial.current_node_id = tutorial.root_node_id;
       sendResponse("Save complete");
 
       break;
 
-    //Deletes the recording
+    // Deletes the recording
     case "clear":
       console.log("Background script: clicked clear button");
       tutorial = new recording();
