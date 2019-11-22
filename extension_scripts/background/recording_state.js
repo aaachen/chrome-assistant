@@ -6,20 +6,21 @@
  *  Upon load, the content script will read the recording state from this file
  *  and then it will determine whether or not to enable the key presses
  *  which select on element (the save box).
+ *  Instructor view
  */
 
 var recording_enabled = false;
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  console.log(
-    sender.tab
-      ? "from a content script:" + sender.tab.url
-      : "from the extension"
-  );
+  // console.log(
+  //   sender.tab
+  //     ? "from a content script:" + sender.tab.url
+  //     : "from the extension"
+  // );
 
   switch (request.command) {
     case "start_recording":
       recording_enabled = true;
-      console.log("background: start_recording received");
+      // console.log("background: start_recording received");
       sendResponse({ msg: "recording state changed to enabled" });
       break;
 

@@ -1,10 +1,10 @@
 {
   "name": "Tutorial Creating Assistant",
-  "description": "Hightlight some pre defined text from websql database after page loads",
+  "description": "Browser Interface for generic tutorial creator",
   "version": "0.1",
-  "permissions": ["tabs", "<all_urls>", "background"],
+  "permissions": ["tabs", "<all_urls>", "background", "nativeMessaging"],
   "browser_action": {
-    "default_icon": "./assets/img/shield.png",
+    "default_icon": "./assets/img/tutorial.png",
     "default_popup": "./html/popup.html"
   },
 
@@ -15,7 +15,6 @@
         "./assets/js/graphlib.min.js",
         "./assets/js/jquery.js",
         "./assets/js/jquery-ui.js",
-        "./extension_scripts/content_scripts/draggable.js",
         "./extension_scripts/content_scripts/main.js"
       ],
       "run_at": "document_end"
@@ -23,11 +22,12 @@
   ],
   "background": {
     "scripts": [
-      "./hot-reload.js",
       "./assets/js/graphlib.min.js",
+      "./assets/js/jquery.js",
       "./extension_scripts/background/background.js",
       "./extension_scripts/background/recording_state.js",
-      "./assets/js/jquery.js"
+      "./extension_scripts/background/native_host_listener.js",      
+      "./hot-reload.js"
     ]
   },
   "manifest_version": 2

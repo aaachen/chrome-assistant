@@ -1,19 +1,20 @@
 $(document).ready(function() {
-  //Clear button clears list
+  // Clear button clears list
   $("#clear_record").click(function() {
-    //send data to server
+    // send data to server
     chrome.runtime.sendMessage({ command: "clear" }, function(response) {
       console.log(response);
     });
   });
 
-  //Loads the record into the frame
+  // Loads the record into the frame
   $("#load_record").click(function() {
-    //send data to server
+    // send data to server
     console.log("Entering load record function");
     chrome.tabs.query({ active: true, currentWindow: true }, function(
       arrayOfTabs
     ) {
+      console.log(arrayOfTabs);
       // since only one tab should be active and in the current window at once
       // the return variable should only have one entry
       chrome.tabs.sendMessage(arrayOfTabs[0].id, { command: "load" }, function(

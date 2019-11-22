@@ -6,24 +6,24 @@
 //x and y of mouse pointer
 var x = 0;
 var y = 0;
-//This element is the element that currently have a border around it when it is selected.
+// This element is the element that currently have a border around it when it is selected.
 var unborderedElementPointerHTML = null;
-//The x and y coordinates of the mouse has to be constantly maintained in order to select an html element.
-$(window).mouseover(function(e) {
+// The x and y coordinates of the mouse has to be constantly maintained in order to select an html element.
+$(window).mouseover(function (e) {
   (x = e.clientX), (y = e.clientY);
 });
 
 var student_view_next = "null";
-//This message asks the background if you are in "load mode"<p>Since the index is zero-based, the first list item is returned:</p>
+// This message asks the background if you are in "load mode"<p>Since the index is zero-based, the first list item is returned:</p>
 
-$(document).ready(function() {
+$(document).ready(function () {
   retrieveItemfromBackgroundScript();
 
-  //Needs to retrieve ephermal background state
-  chrome.runtime.sendMessage({ command: "get_recording_state" }, function(
+  // Needs to retrieve ephermal background state
+  chrome.runtime.sendMessage({ command: "get_recording_state" }, function (
     response
   ) {
-    //sends a message to the recording_content_state, which turns off
+    // sends a message to the recording_content_state, which turns off
     if (response.state == true) {
       document.addEventListener("keydown", detect_element_selection);
     } else {
@@ -33,7 +33,7 @@ $(document).ready(function() {
 });
 
 function retrieveItemfromBackgroundScript() {
-  chrome.runtime.sendMessage({ command: "get-load-status" }, function(
+  chrome.runtime.sendMessage({ command: "get-load-status" }, function (
     response
   ) {
     //if false, you are not in "load mode"
@@ -42,12 +42,11 @@ function retrieveItemfromBackgroundScript() {
     } else {
       createAdvanceLinkButton();
       //Message asks background if you are on the correct link
-      get_dag(function(tutorial) {
+      get_dag(function (tutorial) {
         //If urls match, load the html
-
         if (window.location["href"] == get_current_node(tutorial).url) {
-          //Message asks background for html and moves to next item.
-          //TODO: Present the user with choice instead of going with 0th edge
+          // Message asks background for html and moves to next item.
+          // TODO: Present the user with choice instead of going with 0th edge
           loadHTMLContent(tutorial);
           // get_next_node(tutorial, function(response){
           //     if(response==null) return;
@@ -62,7 +61,12 @@ function retrieveItemfromBackgroundScript() {
   }); //end first reponse function
 }
 
-//Creates the button for the "save" button
+/**
+ *
+ * Creates the button for the "save" button
+ *
+ * */
+
 function create_popup_box(top, left, borderedElement, popup_ID) {
   var new_offset = { top: top, left: left };
   //Title text is the title input box above the main text box
@@ -108,7 +112,7 @@ function create_popup_box(top, left, borderedElement, popup_ID) {
   });
 
   //This function sets the save_button in the student view's css
-  var set_save_button_css_default = function(save_button) {
+  var set_save_button_css_default = function (save_button) {
     save_button.css({
       "background-color": "rgb(18, 226, 169)",
       "border-radius": "1.4em",
@@ -122,7 +126,7 @@ function create_popup_box(top, left, borderedElement, popup_ID) {
 
   //Hover functionality.
   save_button.hover(
-    function() {
+    function () {
       save_button.css({
         "background-color": "rgb(18, 175, 114)",
         "border-radius": "1.4em",
@@ -132,7 +136,7 @@ function create_popup_box(top, left, borderedElement, popup_ID) {
         "margin-top": "3px"
       });
     },
-    function() {
+    function () {
       set_save_button_css_default(save_button);
     }
   );
@@ -142,15 +146,16 @@ function create_popup_box(top, left, borderedElement, popup_ID) {
     "font-size": "18px",
     "text-align": "center"
   });
-  //This combines all the elements under a unified div
+
+  // This combines all the elements under a unified div
   created_element.append(title_text);
   created_element.append(editable_text);
   created_element.append(save_button);
 
   $(created_element).draggable({
-    // //start: function(){}
-    stop: function() {
-      //If when you stop dragging, the title isn't full give focus
+    // start: function(){}
+    stop: function () {
+      // If when you stop dragging, the title isn't full give focus
       if ($(title_text).val().length == 0) {
         $(title_text).focus();
       } else {
@@ -158,23 +163,23 @@ function create_popup_box(top, left, borderedElement, popup_ID) {
       }
     }
   });
-  //Don't let the user drag when either text box is in focus
+  // Don't let the user drag when either text box is in focus
   $(title_text)
     .add(editable_text)
-    .focusin(function() {
+    .focusin(function () {
       $(created_element).draggable({
         cancel: ".editable"
       });
     });
   $(title_text)
     .add(editable_text)
-    .focusout(function() {
+    .focusout(function () {
       $(created_element).draggable({
         cancel: ""
       });
     });
 
-  //Append the created element to the body
+  // Append the created element to the body
   $(created_element)
     .resizable()
     .css({
@@ -185,20 +190,20 @@ function create_popup_box(top, left, borderedElement, popup_ID) {
     .offset(new_offset)
     .appendTo("body");
 
-  //When you click on the textbox, give keyboard focus.
-  $(editable_text).click(function() {
+  // When you click on the textbox, give keyboard focus.
+  $(editable_text).click(function () {
     $(editable_text).focus();
   });
-  //When you click on the textbox, give keyboard focus.
-  $(title_text).click(function() {
+  // When you click on the textbox, give keyboard focus.
+  $(title_text).click(function () {
     $(title_text).focus();
   });
 
-  //Hanldes the click function for newly created save button
-  $(save_button).click(function() {
-    //When you click the save button, this reverts the green block of text back to normal.
+  // Handles the click function for newly created save button
+  $(save_button).click(function () {
+    // When you click the save button, this reverts the green block of text back to normal.
     if (unborderedElementPointerHTML != null) {
-      //This replace with function, removes the element with the green border if one already exists.
+      // This replace with function, removes the element with the green border if one already exists.
       $(elementOnMouseOver).replaceWith(
         $(unborderedElementPointerHTML).prop("outerHTML")
       );
@@ -211,8 +216,8 @@ function create_popup_box(top, left, borderedElement, popup_ID) {
         title_text: $(title_text).val(),
         url: window.location["href"]
       },
-      function(response) {
-        //    alert(response.msg +" : "+ response.enteredText + " : "+ window.location["href"]);
+      function (response) {
+        // alert(response.msg +" : "+ response.enteredText + " : "+ window.location["href"]);
       }
     );
     created_element.remove();
@@ -221,22 +226,29 @@ function create_popup_box(top, left, borderedElement, popup_ID) {
   return created_element;
 }
 
-//detect element selection is an event listener, which we can add and remove.
-var detect_element_selection = function(event) {
+/**
+ *
+ * Detect element selection is an event listener, which we can add and remove.
+ * Logic when Ctrl + Q is pressed
+ *
+ * */
+var detect_element_selection = function (event) {
   if (event.keyCode == 81 && event.ctrlKey) {
     // Ctrl + Q
-    //This popup id is the unique ID for all of the SAVE button popups.
+    // This popup id is the unique ID for all of the SAVE button popups.
     var popup_ID = "4iufbw";
-    //If a popup already exists, delete the old one.
+
+    // If a popup already exists, delete the old one.
     if (document.body.contains(document.getElementById(popup_ID))) {
       if (unborderedElementPointerHTML != null) {
-        //This replace with function, removes the element with the green border if one already exists.
+        // This replace with function, removes the element with the green border if one already exists.
         $(elementOnMouseOver).replaceWith(
           $(unborderedElementPointerHTML).prop("outerHTML")
         );
       }
       document.getElementById(popup_ID).remove();
     }
+
     elementOnMouseOver = document.elementFromPoint(x, y);
     unborderedElementPointerHTML = elementOnMouseOver.outerHTML;
     if (
@@ -255,11 +267,12 @@ var detect_element_selection = function(event) {
 };
 
 function goToNextURL() {
-  //TODO: Present the user with choice instead of going with 0th edge
-  get_dag(function(tutorial) {
-    get_next_node(tutorial, function(response) {
+  // TODO: Present the user with choice instead of going with 0th edge
+  get_dag(function (tutorial) {
+    console.log("go to next url");
+    get_next_node(tutorial, function (response) {
       if (response == null) return;
-      //Converts tutorial into graphlib object
+      // Converts tutorial into graphlib object
       tutorial = JSON.parse(response.tutorial);
       tutorial.DAG = graphlib.json.read(tutorial.DAG);
 
@@ -275,7 +288,7 @@ function goToNextURL() {
   });
 }
 
-//Displays border on webpage from element stored in background page.
+// Displays border on webpage from element stored in background page.
 function loadHTMLContent(tutorial) {
   console.log("inside loadHTML content");
   var instructor_text = $('<p id = "sdajck3" href="#">Text box</p>');
@@ -295,21 +308,22 @@ function loadHTMLContent(tutorial) {
 
   instructor_text.appendTo("body");
 
-  //console.log("Searching for element: "
+  // console.log("Searching for element: "
   var all_elements = document.getElementsByTagName("*");
-  console.log(get_current_node(tutorial));
+  console.log(tutorial);
   console.log(get_current_node(tutorial));
   console.log(get_current_node(tutorial).html);
-  for (var i = 0, element; (element = all_elements[i++]); ) {
+  for (var i = 0, element; (element = all_elements[i++]);) {
     if (element.outerHTML == get_current_node(tutorial).html) {
       element.style.border = "thick solid green";
     }
   }
 }
 
-//This listens to the popup script
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+// This listens to the popup script
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   switch (request.command) {
+    // load the tutorial
     case "load":
       if (student_view_next != "null") {
         console.log("not null");
@@ -317,17 +331,18 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         student_view_next = "null";
         sendResponse("Action completed");
       }
-      //If urls match, load the html
-      get_dag(function(tutorial) {
+      // If urls match, load the html
+      get_dag(function (tutorial) {
+        console.log("at load");
         console.log(tutorial);
         if (window.location["href"] != get_current_node(tutorial).url) {
-          //Message asks background for html and moves to next item.
+          // Message asks background for html and moves to next item.
           window.location = get_current_node(tutorial).url;
-        } //end of null check
+        } // end of null check
         loadHTMLContent(tutorial);
       });
 
-      chrome.runtime.sendMessage({ command: "set-load-status" }, function(
+      chrome.runtime.sendMessage({ command: "set-load-status" }, function (
         response
       ) {
         console.log("Setting load status to: " + response);
@@ -349,7 +364,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function createAdvanceLinkButton() {
-  //Removes the next button if it already exists
+  // Removes the next button if it already exists
   if (student_view_next != "null") {
     student_view_next.remove();
   }
@@ -372,7 +387,7 @@ function createAdvanceLinkButton() {
 
   student_view_next.appendTo("body");
 
-  student_view_next.click(function(e) {
+  student_view_next.click(function (e) {
     e.preventDefault();
     console.log("trigger next");
     goToNextURL();
@@ -395,7 +410,10 @@ function get_current_node(tutorial) {
 
 //This is an asynchronous function
 function get_dag(callback) {
-  chrome.runtime.sendMessage({ command: "peek" }, function(response) {
+  console.log("get_dag called, callback: ", callback);
+  chrome.runtime.sendMessage({ command: "peek" }, function (response) {
+    // console.log("at get_dag", response);
+
     var current_tutorial = JSON.parse(response.tutorial);
     current_tutorial.DAG = graphlib.json.read(current_tutorial.DAG);
     callback(current_tutorial);
@@ -414,7 +432,7 @@ function get_next_node(tutorial, callback) {
   var next_id = tutorial.DAG.outEdges(tutorial.current_node_id)[0].w;
   chrome.runtime.sendMessage(
     { command: "get_next", next_id: next_id },
-    function(response) {
+    function (response) {
       callback(response);
     }
   );

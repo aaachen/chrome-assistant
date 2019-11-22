@@ -81,11 +81,13 @@ var load_status = false;
 // merge the DAG.
 // Clear: This empties all of the items in the DAG and recording stream. (Say)
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  console.log(
-    sender.tab
-      ? "from a content script:" + sender.tab.url
-      : "from the extension"
-  );
+  // console.log(request);
+  // console.log(sender);
+  // console.log(
+  //   sender.tab
+  //     ? "from a content script:" + sender.tab.url
+  //     : "from the extension"
+  // );
 
   switch (request.command) {
     case "addName":
@@ -114,15 +116,15 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       break;
 
     case "get_prev":
-      console.log("Prev button clicked");
+      // console.log("Prev button clicked");
       break;
 
     case "get_options":
-      console.log("Get options called");
+      // console.log("Get options called");
       break;
     // This case is only used when recording steps. Adds a step to tutorial.
     case "record_action":
-      console.log("Record action called");
+      // console.log("Record action called");
       insertNewNode(
         tutorial,
         new Node(
@@ -140,7 +142,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
     // Sends the tutorial object to the content script
     case "save":
-      console.log("Save hit");
+      // console.log("Save hit");
       // When the tutorial starts the current node id is set to the root node ID to be the starting place.
       tutorial.current_node_id = tutorial.root_node_id;
       sendResponse("Save complete");
@@ -149,7 +151,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
     // Deletes the recording
     case "clear":
-      console.log("Background script: clicked clear button");
+      // console.log("Background script: clicked clear button");
       tutorial = new recording();
       sendResponse("Clear complete");
       break;
@@ -164,7 +166,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       break;
 
     default:
-      console.log("Default case reached");
+      // console.log("Default case reached");
       break;
   }
 });
+
+// console.log("yeaaa loaded!!!")

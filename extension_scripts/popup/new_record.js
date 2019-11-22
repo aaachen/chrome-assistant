@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  /*load data from background script*/
+  // load data from background script
 
   chrome.runtime.sendMessage({ command: "get_recording_state" }, function(
     response
@@ -36,8 +36,8 @@ $("#startR").on("click", function() {
       chrome.tabs.sendMessage(
         tabs[0].id,
         { command: "enable_hot_key" },
-        function(responsee) {
-          console.log("Enable hot key returns: " + responsee);
+        function(response) {
+          console.log("Enable hot key returns: " + response);
         }
       );
     });
@@ -48,18 +48,20 @@ $("#endR").on("click", function() {
   console.log("endR click");
   $(this).prop("disabled", true);
   $("#startR").prop("disabled", false);
+  
+  //sends a message to the recording_content_state, which turns off
   chrome.runtime.sendMessage({ command: "end_recording" }, function(response) {
-    //sends a message to the recording_content_state, which turns off
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       chrome.tabs.sendMessage(
         tabs[0].id,
         { command: "disable_hot_key" },
-        function(responsee) {
-          console.log(responsee);
+        function(response) {
+          console.log(response);
         }
       );
     });
   });
+
   chrome.runtime.sendMessage({ command: "save" }, function(response) {
     console.log(response);
   });
